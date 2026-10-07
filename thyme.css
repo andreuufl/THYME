@@ -2452,8 +2452,17 @@ a.carrusel-card:hover .carrusel-foto img{transform:scale(1.07);}
 .box-media .producto-placeholder svg{width:38%;height:38%;}
 /* Las tablas son fotos cenitales cuadradas y la tabla entera es el producto:
    en esta pagina la foto va en 1:1 para que no se recorte por los lados. */
-.box-grid-tablas .box-card{grid-template-columns:1fr 1fr;}
+/* Tres tablas: una por fila, foto y texto a medias, alternando el lado.
+   minmax(0,1fr) impide que la foto cuadrada ensanche su columna y
+   deje el texto cortado (lo que pasaba con la rejilla de dos). */
+.box-grid-tablas{grid-template-columns:minmax(0,1fr);max-width:1080px;margin-inline:auto;gap:32px;}
+.box-grid-tablas .box-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
 .box-grid-tablas .box-media{aspect-ratio:1/1;min-height:0;}
+.box-grid-tablas .box-body{padding:clamp(26px,4vw,48px);justify-content:center;}
+.box-grid-tablas .box-body h2{font-size:clamp(1.7rem,2.6vw,2.4rem);}
+@media (min-width:761px){
+  .box-grid-tablas .box-card:nth-child(even) .box-media{order:2;}
+}
 @media (max-width:760px){
   .box-grid-tablas .box-card{grid-template-columns:1fr;}
 
