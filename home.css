@@ -562,3 +562,38 @@ fieldset{border:0;min-width:0;}
   .x-snap-nav .x-round{width:42px;height:42px;}
   .x-snap-nav .x-round svg{width:17px;height:17px;}
 }
+
+/* ============================================================
+   RESERVAS · un solo formulario con selector (mesa / evento)
+   ============================================================ */
+.x-anchor{position:absolute;top:0;left:0;width:1px;height:1px;}
+.x-booking [hidden]{display:none!important;}
+.x-checks-light li{color:rgba(244,238,227,.78);}
+.x-checks-light li::before{border-color:var(--gold-soft);}
+.x-checks-light a{color:var(--cream);}
+.x-mode-copy{animation:x-mode-in .6s var(--ease);}
+.x-mode-form{animation:x-mode-in .5s var(--ease);}
+@keyframes x-mode-in{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+.x-mode{margin:-4px 0 30px;padding-bottom:26px;border-bottom:1px solid var(--line);}
+.x-mode-label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.x-mode-field{position:relative;}
+.x-mode-ico{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--ink);color:var(--gold-soft);pointer-events:none;transition:background .35s;}
+.x-mode-ico svg{width:22px;height:22px;grid-area:1/1;transition:opacity .35s, transform .45s var(--ease);}
+.x-booking[data-mode="mesa"] .x-mode-ico [data-mode-icon="evento"],
+.x-booking[data-mode="evento"] .x-mode-ico [data-mode-icon="mesa"]{opacity:0;transform:scale(.6) rotate(-20deg);}
+.x-mode-field select{width:100%;min-height:60px;padding:12px 48px 12px 64px;font-family:var(--serif);font-size:1.12rem;font-weight:400;letter-spacing:-.01em;color:var(--ink);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B0874B' stroke-width='1.8'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 18px center/18px;border:1px solid rgba(29,25,19,.16);border-radius:16px;-webkit-appearance:none;appearance:none;cursor:pointer;text-overflow:ellipsis;transition:border-color .25s, box-shadow .25s;}
+.x-mode-field select:hover{border-color:var(--ink);}
+.x-mode-field select:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 4px rgba(176,135,75,.18);}
+.x-mode-hint{margin-top:10px;font-size:.84rem;color:var(--ink-55);}
+.x-booking-card:has(.form-success.is-visible) .x-mode,
+.x-booking-card:has(.x-success.is-visible) .x-mode{display:none;}
+
+@media (max-width:760px){
+  .x-mode{margin-bottom:24px;padding-bottom:22px;}
+  .x-mode-field select{font-size:1.02rem;min-height:58px;padding-left:60px;}
+  .x-mode-ico{width:40px;height:40px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .x-mode-copy,.x-mode-form{animation:none;}
+}

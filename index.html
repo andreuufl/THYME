@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap">
 <link rel="preload" as="image" imagesrcset="assets/img/hero-mediterranea-square-600.webp 600w, assets/img/hero-mediterranea-square.webp 900w" imagesizes="(max-width: 760px) 92vw, 560px" type="image/webp" fetchpriority="high">
 
-<link rel="stylesheet" href="home.css?v=13">
+<link rel="stylesheet" href="home.css?v=14">
 
 <script type="application/ld+json">
 {
@@ -203,14 +203,16 @@
     </div>
   </section>
 
-  <!-- ================= RESERVA · por pasos ================= -->
-  <section class="x-sec" id="reserva" aria-labelledby="res-title">
+  <!-- ================= RESERVAS · un solo formulario (mesa privada o evento) ================= -->
+  <section class="x-sec x-dark x-booking" id="reserva" aria-label="Reservas y presupuestos" data-booking data-mode="mesa">
+    <span id="eventos" class="x-anchor" aria-hidden="true"></span>
     <div class="x-wrap x-split">
       <div class="x-split-copy x-reveal">
-        <p class="x-kicker">Mesa privada · l'Eixample</p>
+        <div class="x-mode-copy" data-mode-pane="mesa">
+        <p class="x-kicker x-kicker-light">Mesa privada · l'Eixample</p>
         <h2 id="res-title" class="x-h2">Reserva tu <em>mesa privada</em></h2>
-        <p class="x-muted">Una experiencia gastronómica para 2 a 10 personas. Abrimos todos los días, con turnos de 14:00 a 23:00. Reservar no cuesta nada: se paga el mismo día.</p>
-        <ul class="x-checks">
+        <p class="x-muted-light">Una experiencia gastronómica para 2 a 10 personas. Abrimos todos los días, con turnos de 14:00 a 23:00. Reservar no cuesta nada: se paga el mismo día.</p>
+        <ul class="x-checks x-checks-light">
           <li>La ubicación exacta se envía al confirmar por WhatsApp.</li>
           <li>Cada turno dura unas dos horas.</li>
           <li>Cancelación gratuita hasta 24 h antes. <a href="terminos.html#reembolso">Ver política</a></li>
@@ -219,104 +221,8 @@
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.2 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20z"/></svg>
           ¿Dudas? Escríbenos
         </a>
-      </div>
-
-      <div class="x-card x-reveal">
-        <div class="form-success" role="status" aria-live="polite">
-          <div class="success-icon"><svg class="success-check" viewBox="0 0 52 52" width="52" height="52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="2.5"/><path fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M14 27l7 7 16-16"/></svg></div>
-          <strong>¡Solicitud enviada!</strong>
-          <p>Hemos abierto WhatsApp con los datos de tu reserva. Te llevamos a confirmarlo…</p>
         </div>
-
-        <form id="reserva-form" class="x-stepper" data-stepper novalidate>
-          <ol class="x-steps" aria-hidden="true">
-            <li class="is-active"><b>1</b><span>Día y turno</span></li>
-            <li><b>2</b><span>Tu mesa</span></li>
-            <li><b>3</b><span>Contacto</span></li>
-          </ol>
-          <div class="x-progress" aria-hidden="true"><i data-step-bar></i></div>
-
-          <fieldset class="x-step is-active" data-step>
-            <legend class="x-step-q">¿Qué día os viene bien?</legend>
-            <div class="field" data-field="disponibilidad">
-              <p class="x-avail" data-avail-summary>Elige día y turno disponibles</p>
-              <div class="day-picker" data-day-picker aria-label="Selecciona un día"></div>
-              <div class="time-picker" data-time-picker aria-label="Selecciona un turno"></div>
-              <p class="field-error">Selecciona un día y un turno disponibles.</p>
-              <input type="hidden" id="reserva-fecha" name="fecha">
-              <input type="hidden" id="reserva-hora" name="hora">
-            </div>
-          </fieldset>
-
-          <fieldset class="x-step" data-step>
-            <legend class="x-step-q">Cuéntanos cómo será vuestra mesa</legend>
-            <div class="field">
-              <label for="reserva-personas">Comensales</label>
-              <input type="number" id="reserva-personas" name="personas" min="2" max="10" value="2" inputmode="numeric" required>
-              <p class="field-error">Indica cuántos sois (mínimo 2).</p>
-            </div>
-            <div class="field">
-              <label for="reserva-tabla">Selección preferida</label>
-              <select id="reserva-tabla" name="tabla" required>
-                <option value="">Elige una opción</option>
-                <option value="iberica">Selección Ibérica</option>
-                <option value="quesos">Selección de Quesos</option>
-                <option value="mixta">Selección Mixta THYME</option>
-                <option value="dulce">Selección Dulce</option>
-                <option value="vegetal">Selección Vegetal</option>
-                <option value="sin-decidir">Aún no lo sé, que me aconsejen</option>
-              </select>
-              <p class="field-error">Elige una opción.</p>
-            </div>
-            <div class="field">
-              <label for="reserva-mensaje">Algo que debamos saber <small>(opcional)</small></label>
-              <textarea id="reserva-mensaje" name="mensaje" rows="3" placeholder="Alergias, ocasión especial, preferencia de vino…"></textarea>
-            </div>
-          </fieldset>
-
-          <fieldset class="x-step" data-step>
-            <legend class="x-step-q">¿Cómo te contactamos?</legend>
-            <div class="field">
-              <label for="reserva-nombre">Nombre</label>
-              <input type="text" id="reserva-nombre" name="nombre" autocomplete="name" required>
-              <p class="field-error">Escribe tu nombre.</p>
-            </div>
-            <div class="x-row">
-              <div class="field">
-                <label for="reserva-email">Email</label>
-                <input type="email" id="reserva-email" name="email" autocomplete="email" inputmode="email" required>
-                <p class="field-error">Introduce un email válido.</p>
-              </div>
-              <div class="field">
-                <label for="reserva-telefono">Teléfono</label>
-                <input type="tel" id="reserva-telefono" name="telefono" autocomplete="tel" placeholder="+34 6XX XXX XXX" required>
-                <p class="field-error">Introduce un teléfono válido.</p>
-              </div>
-            </div>
-            <div class="field field-consent" data-field="consent">
-              <label class="x-consent">
-                <input type="checkbox" id="reserva-consent" name="consent" required>
-                <span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y los <a href="terminos.html" target="_blank" rel="noopener">términos</a>.</span>
-              </label>
-              <p class="field-error">Debes aceptar la política de privacidad para continuar.</p>
-            </div>
-          </fieldset>
-
-          <div class="x-step-actions">
-            <button type="button" class="x-btn x-btn-ghost" data-step-back>← Atrás</button>
-            <button type="button" class="x-btn x-btn-dark" data-step-next>Continuar</button>
-            <button type="submit" class="x-btn x-btn-dark" data-step-submit>Confirmar por WhatsApp</button>
-          </div>
-          <p class="x-note">No cobramos nada al reservar. Confirmamos disponibilidad real por WhatsApp.</p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= EVENTOS · presupuesto por pasos ================= -->
-  <section class="x-sec x-dark" id="eventos" aria-labelledby="ev-title">
-    <div class="x-wrap x-split x-split-rev">
-      <div class="x-split-copy x-reveal">
+        <div class="x-mode-copy" data-mode-pane="evento" hidden>
         <p class="x-kicker x-kicker-light">Catering para eventos</p>
         <h2 id="ev-title" class="x-h2">Tu evento, <em>de principio a fin</em></h2>
         <p class="x-muted-light">Ajustamos el formato al aforo, al espacio y al estilo de tu celebración. Tú nos cuentas qué tienes en mente y nosotros nos encargamos del resto.</p>
@@ -326,101 +232,206 @@
           <li><strong>A medida</strong><span>sin plantillas</span></li>
         </ul>
         <figure class="x-ev-photo"><picture><source srcset="assets/img/hero-mesa-flores-square-600.webp 600w, assets/img/hero-mesa-flores-square.webp 900w" sizes="(max-width: 760px) 92vw, 560px" type="image/webp"><img src="assets/img/hero-mesa-flores-square.jpg" alt="Mesa de evento con montajes individuales y flores" loading="lazy" width="900" height="900"></picture></figure>
+        </div>
       </div>
 
-      <div class="x-card x-card-light x-reveal">
-        <div class="x-success" role="status" aria-live="polite" data-events-success>
-          <div class="success-icon"><svg class="success-check" viewBox="0 0 52 52" width="52" height="52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="2.5"/><path fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M14 27l7 7 16-16"/></svg></div>
-          <strong>¡Solicitud enviada!</strong>
-          <p>Hemos abierto WhatsApp con los datos de tu evento. Te llevamos a confirmarlo…</p>
+      <div class="x-card x-card-light x-booking-card x-reveal">
+        <div class="x-mode">
+          <label class="x-mode-label" for="booking-mode">¿Qué quieres reservar?</label>
+          <div class="x-mode-field">
+            <span class="x-mode-ico" aria-hidden="true"><svg data-mode-icon="mesa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18"/><path d="M5 18a7 7 0 0 1 14 0"/><path d="M12 11V8.5"/><path d="M10.5 8.5h3"/></svg><svg data-mode-icon="evento" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3l1.8 4.7 4.7 1.8-4.7 1.8L11 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span>
+            <select id="booking-mode" data-mode-select>
+              <option value="mesa">Mesa privada · 2 a 10 personas</option>
+              <option value="evento">Catering para un evento · 10 a 200+</option>
+            </select>
+          </div>
+          <p class="x-mode-hint" aria-live="polite"><span data-mode-pane="mesa">Experiencia gastronómica en l'Eixample. Reservar es gratis.</span><span data-mode-pane="evento" hidden>Presupuesto a medida y sin compromiso en menos de 24 h.</span></p>
         </div>
 
-        <form id="events-form" class="x-stepper" data-stepper novalidate>
-          <ol class="x-steps" aria-hidden="true">
-            <li class="is-active"><b>1</b><span>Evento</span></li>
-            <li><b>2</b><span>Detalles</span></li>
-            <li><b>3</b><span>Contacto</span></li>
-          </ol>
-          <div class="x-progress" aria-hidden="true"><i data-step-bar></i></div>
-
-          <fieldset class="x-step is-active" data-step>
-            <legend class="x-step-q">¿Qué estás celebrando?</legend>
-            <div class="field">
-              <div class="x-choices" data-choices="events-tipo" role="radiogroup" aria-label="Tipo de evento">
-                <button type="button" role="radio" aria-checked="false" data-value="Evento corporativo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>Empresa</button>
-                <button type="button" role="radio" aria-checked="false" data-value="Cumpleaños"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 21h16v-8H4z"/><path d="M4 16c2 1 4 1 6 0s4-1 6 0 3 1 4 0"/><path d="M12 13V9"/><path d="M12 6c-1-1 0-3 0-3s1 2 0 3z"/></svg>Cumpleaños</button>
-                <button type="button" role="radio" aria-checked="false" data-value="Otro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg>Otro</button>
-              </div>
-              <select id="events-tipo" name="tipo" class="x-sr" tabindex="-1" aria-hidden="true" required>
-                <option value="">Elige una opción</option>
-                <option value="Evento corporativo">Evento corporativo</option>
-                <option value="Cumpleaños">Cumpleaños</option>
-                <option value="Otro">Otro</option>
-              </select>
-              <p class="field-error">Elige el tipo de evento.</p>
-            </div>
-            <div class="x-row">
-              <div class="field">
-                <label for="events-fecha">Fecha aproximada</label>
-                <input type="date" id="events-fecha" name="fecha" required>
-                <p class="field-error">Indica una fecha aproximada.</p>
-              </div>
-              <div class="field">
-                <label for="events-invitados">Nº de invitados</label>
-                <input type="number" id="events-invitados" name="invitados" min="10" placeholder="Ej. 60" inputmode="numeric" required>
-                <p class="field-error">Indica cuántos invitados (mínimo 10).</p>
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset class="x-step" data-step>
-            <legend class="x-step-q">¿Dónde y cómo lo imaginas?</legend>
-            <div class="field">
-              <label for="events-ubicacion">Ubicación del evento</label>
-              <input type="text" id="events-ubicacion" name="ubicacion" placeholder="Ciudad o nombre del espacio" required>
-              <p class="field-error">Indica dónde se celebra el evento.</p>
-            </div>
-            <div class="field">
-              <label for="events-mensaje">Cuéntanos más <small>(opcional)</small></label>
-              <textarea id="events-mensaje" name="mensaje" rows="4" placeholder="Estilo del evento, alergias, presupuesto orientativo…"></textarea>
-            </div>
-          </fieldset>
-
-          <fieldset class="x-step" data-step>
-            <legend class="x-step-q">¿A quién enviamos la propuesta?</legend>
-            <div class="field">
-              <label for="events-nombre">Nombre</label>
-              <input type="text" id="events-nombre" name="nombre" autocomplete="name" required>
-              <p class="field-error">Escribe tu nombre.</p>
-            </div>
-            <div class="x-row">
-              <div class="field">
-                <label for="events-email">Email</label>
-                <input type="email" id="events-email" name="email" autocomplete="email" inputmode="email" required>
-                <p class="field-error">Introduce un email válido.</p>
-              </div>
-              <div class="field">
-                <label for="events-telefono">Teléfono</label>
-                <input type="tel" id="events-telefono" name="telefono" autocomplete="tel" placeholder="+34 6XX XXX XXX" required>
-                <p class="field-error">Introduce un teléfono válido.</p>
-              </div>
-            </div>
-            <div class="field field-consent" data-field="events-consent">
-              <label class="x-consent">
-                <input type="checkbox" id="events-consent" name="consent" required>
-                <span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y los <a href="terminos.html" target="_blank" rel="noopener">términos</a>.</span>
-              </label>
-              <p class="field-error">Debes aceptar la política de privacidad para continuar.</p>
-            </div>
-          </fieldset>
-
-          <div class="x-step-actions">
-            <button type="button" class="x-btn x-btn-ghost" data-step-back>← Atrás</button>
-            <button type="button" class="x-btn x-btn-dark" data-step-next>Continuar</button>
-            <button type="submit" class="x-btn x-btn-dark" data-step-submit>Solicitar presupuesto</button>
+        <div class="x-mode-form" data-mode-pane="mesa">
+  <div class="form-success" role="status" aria-live="polite">
+            <div class="success-icon"><svg class="success-check" viewBox="0 0 52 52" width="52" height="52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="2.5"/><path fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M14 27l7 7 16-16"/></svg></div>
+            <strong>¡Solicitud enviada!</strong>
+            <p>Hemos abierto WhatsApp con los datos de tu reserva. Te llevamos a confirmarlo…</p>
           </div>
-          <p class="x-note">Sin compromiso. Te respondemos en menos de 24 h.</p>
-        </form>
+
+          <form id="reserva-form" class="x-stepper" data-stepper novalidate>
+            <ol class="x-steps" aria-hidden="true">
+              <li class="is-active"><b>1</b><span>Día y turno</span></li>
+              <li><b>2</b><span>Tu mesa</span></li>
+              <li><b>3</b><span>Contacto</span></li>
+            </ol>
+            <div class="x-progress" aria-hidden="true"><i data-step-bar></i></div>
+
+            <fieldset class="x-step is-active" data-step>
+              <legend class="x-step-q">¿Qué día os viene bien?</legend>
+              <div class="field" data-field="disponibilidad">
+                <p class="x-avail" data-avail-summary>Elige día y turno disponibles</p>
+                <div class="day-picker" data-day-picker aria-label="Selecciona un día"></div>
+                <div class="time-picker" data-time-picker aria-label="Selecciona un turno"></div>
+                <p class="field-error">Selecciona un día y un turno disponibles.</p>
+                <input type="hidden" id="reserva-fecha" name="fecha">
+                <input type="hidden" id="reserva-hora" name="hora">
+              </div>
+            </fieldset>
+
+            <fieldset class="x-step" data-step>
+              <legend class="x-step-q">Cuéntanos cómo será vuestra mesa</legend>
+              <div class="field">
+                <label for="reserva-personas">Comensales</label>
+                <input type="number" id="reserva-personas" name="personas" min="2" max="10" value="2" inputmode="numeric" required>
+                <p class="field-error">Indica cuántos sois (mínimo 2).</p>
+              </div>
+              <div class="field">
+                <label for="reserva-tabla">Selección preferida</label>
+                <select id="reserva-tabla" name="tabla" required>
+                  <option value="">Elige una opción</option>
+                  <option value="iberica">Selección Ibérica</option>
+                  <option value="quesos">Selección de Quesos</option>
+                  <option value="mixta">Selección Mixta THYME</option>
+                  <option value="dulce">Selección Dulce</option>
+                  <option value="vegetal">Selección Vegetal</option>
+                  <option value="sin-decidir">Aún no lo sé, que me aconsejen</option>
+                </select>
+                <p class="field-error">Elige una opción.</p>
+              </div>
+              <div class="field">
+                <label for="reserva-mensaje">Algo que debamos saber <small>(opcional)</small></label>
+                <textarea id="reserva-mensaje" name="mensaje" rows="3" placeholder="Alergias, ocasión especial, preferencia de vino…"></textarea>
+              </div>
+            </fieldset>
+
+            <fieldset class="x-step" data-step>
+              <legend class="x-step-q">¿Cómo te contactamos?</legend>
+              <div class="field">
+                <label for="reserva-nombre">Nombre</label>
+                <input type="text" id="reserva-nombre" name="nombre" autocomplete="name" required>
+                <p class="field-error">Escribe tu nombre.</p>
+              </div>
+              <div class="x-row">
+                <div class="field">
+                  <label for="reserva-email">Email</label>
+                  <input type="email" id="reserva-email" name="email" autocomplete="email" inputmode="email" required>
+                  <p class="field-error">Introduce un email válido.</p>
+                </div>
+                <div class="field">
+                  <label for="reserva-telefono">Teléfono</label>
+                  <input type="tel" id="reserva-telefono" name="telefono" autocomplete="tel" placeholder="+34 6XX XXX XXX" required>
+                  <p class="field-error">Introduce un teléfono válido.</p>
+                </div>
+              </div>
+              <div class="field field-consent" data-field="consent">
+                <label class="x-consent">
+                  <input type="checkbox" id="reserva-consent" name="consent" required>
+                  <span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y los <a href="terminos.html" target="_blank" rel="noopener">términos</a>.</span>
+                </label>
+                <p class="field-error">Debes aceptar la política de privacidad para continuar.</p>
+              </div>
+            </fieldset>
+
+            <div class="x-step-actions">
+              <button type="button" class="x-btn x-btn-ghost" data-step-back>← Atrás</button>
+              <button type="button" class="x-btn x-btn-dark" data-step-next>Continuar</button>
+              <button type="submit" class="x-btn x-btn-dark" data-step-submit>Confirmar por WhatsApp</button>
+            </div>
+            <p class="x-note">No cobramos nada al reservar. Confirmamos disponibilidad real por WhatsApp.</p>
+          </form>
+        </div>
+
+        <div class="x-mode-form" data-mode-pane="evento" hidden>
+  <div class="x-success" role="status" aria-live="polite" data-events-success>
+            <div class="success-icon"><svg class="success-check" viewBox="0 0 52 52" width="52" height="52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="2.5"/><path fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M14 27l7 7 16-16"/></svg></div>
+            <strong>¡Solicitud enviada!</strong>
+            <p>Hemos abierto WhatsApp con los datos de tu evento. Te llevamos a confirmarlo…</p>
+          </div>
+
+          <form id="events-form" class="x-stepper" data-stepper novalidate>
+            <ol class="x-steps" aria-hidden="true">
+              <li class="is-active"><b>1</b><span>Evento</span></li>
+              <li><b>2</b><span>Detalles</span></li>
+              <li><b>3</b><span>Contacto</span></li>
+            </ol>
+            <div class="x-progress" aria-hidden="true"><i data-step-bar></i></div>
+
+            <fieldset class="x-step is-active" data-step>
+              <legend class="x-step-q">¿Qué estás celebrando?</legend>
+              <div class="field">
+                <div class="x-choices" data-choices="events-tipo" role="radiogroup" aria-label="Tipo de evento">
+                  <button type="button" role="radio" aria-checked="false" data-value="Evento corporativo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>Empresa</button>
+                  <button type="button" role="radio" aria-checked="false" data-value="Cumpleaños"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 21h16v-8H4z"/><path d="M4 16c2 1 4 1 6 0s4-1 6 0 3 1 4 0"/><path d="M12 13V9"/><path d="M12 6c-1-1 0-3 0-3s1 2 0 3z"/></svg>Cumpleaños</button>
+                  <button type="button" role="radio" aria-checked="false" data-value="Otro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg>Otro</button>
+                </div>
+                <select id="events-tipo" name="tipo" class="x-sr" tabindex="-1" aria-hidden="true" required>
+                  <option value="">Elige una opción</option>
+                  <option value="Evento corporativo">Evento corporativo</option>
+                  <option value="Cumpleaños">Cumpleaños</option>
+                  <option value="Otro">Otro</option>
+                </select>
+                <p class="field-error">Elige el tipo de evento.</p>
+              </div>
+              <div class="x-row">
+                <div class="field">
+                  <label for="events-fecha">Fecha aproximada</label>
+                  <input type="date" id="events-fecha" name="fecha" required>
+                  <p class="field-error">Indica una fecha aproximada.</p>
+                </div>
+                <div class="field">
+                  <label for="events-invitados">Nº de invitados</label>
+                  <input type="number" id="events-invitados" name="invitados" min="10" placeholder="Ej. 60" inputmode="numeric" required>
+                  <p class="field-error">Indica cuántos invitados (mínimo 10).</p>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="x-step" data-step>
+              <legend class="x-step-q">¿Dónde y cómo lo imaginas?</legend>
+              <div class="field">
+                <label for="events-ubicacion">Ubicación del evento</label>
+                <input type="text" id="events-ubicacion" name="ubicacion" placeholder="Ciudad o nombre del espacio" required>
+                <p class="field-error">Indica dónde se celebra el evento.</p>
+              </div>
+              <div class="field">
+                <label for="events-mensaje">Cuéntanos más <small>(opcional)</small></label>
+                <textarea id="events-mensaje" name="mensaje" rows="4" placeholder="Estilo del evento, alergias, presupuesto orientativo…"></textarea>
+              </div>
+            </fieldset>
+
+            <fieldset class="x-step" data-step>
+              <legend class="x-step-q">¿A quién enviamos la propuesta?</legend>
+              <div class="field">
+                <label for="events-nombre">Nombre</label>
+                <input type="text" id="events-nombre" name="nombre" autocomplete="name" required>
+                <p class="field-error">Escribe tu nombre.</p>
+              </div>
+              <div class="x-row">
+                <div class="field">
+                  <label for="events-email">Email</label>
+                  <input type="email" id="events-email" name="email" autocomplete="email" inputmode="email" required>
+                  <p class="field-error">Introduce un email válido.</p>
+                </div>
+                <div class="field">
+                  <label for="events-telefono">Teléfono</label>
+                  <input type="tel" id="events-telefono" name="telefono" autocomplete="tel" placeholder="+34 6XX XXX XXX" required>
+                  <p class="field-error">Introduce un teléfono válido.</p>
+                </div>
+              </div>
+              <div class="field field-consent" data-field="events-consent">
+                <label class="x-consent">
+                  <input type="checkbox" id="events-consent" name="consent" required>
+                  <span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y los <a href="terminos.html" target="_blank" rel="noopener">términos</a>.</span>
+                </label>
+                <p class="field-error">Debes aceptar la política de privacidad para continuar.</p>
+              </div>
+            </fieldset>
+
+            <div class="x-step-actions">
+              <button type="button" class="x-btn x-btn-ghost" data-step-back>← Atrás</button>
+              <button type="button" class="x-btn x-btn-dark" data-step-next>Continuar</button>
+              <button type="submit" class="x-btn x-btn-dark" data-step-submit>Solicitar presupuesto</button>
+            </div>
+            <p class="x-note">Sin compromiso. Te respondemos en menos de 24 h.</p>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -520,7 +531,7 @@
 <script src="repertorio.js?v=2"></script>
 <script src="thyme-main.js?v=23"></script>
 <script src="resenas.js?v=1"></script>
-<script src="home.js?v=4"></script>
+<script src="home.js?v=5"></script>
 <script src="analitica.js?v=1"></script>
 </body>
 </html>

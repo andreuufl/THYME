@@ -202,6 +202,48 @@
     });
   });
 
+  /* ---------- Un solo formulario: el cliente elige mesa privada o evento ---------- */
+  (function () {
+    var seccion = document.querySelector('[data-booking]');
+    if (!seccion) return;
+    var selector = seccion.querySelector('[data-mode-select]');
+    var paneles = seccion.querySelectorAll('[data-mode-pane]');
+
+    function modoDesdeHash(h) {
+      if (/#eventos?$/.test(h || '')) return 'evento';
+      if (/#reserva$/.test(h || '')) return 'mesa';
+      return null;
+    }
+
+    function poner(modo, actualizarUrl) {
+      if (modo !== 'mesa' && modo !== 'evento') return;
+      seccion.setAttribute('data-mode', modo);
+      if (selector && selector.value !== modo) selector.value = modo;
+      Array.prototype.forEach.call(paneles, function (p) {
+        p.hidden = p.getAttribute('data-mode-pane') !== modo;
+      });
+      if (actualizarUrl && window.history && history.replaceState) {
+        try { history.replaceState(null, '', modo === 'evento' ? '#eventos' : '#reserva'); } catch (e) {}
+      }
+    }
+
+    if (selector) selector.addEventListener('change', function () {
+      poner(selector.value, true);
+      if (window.THYME && window.THYME.anotar) window.THYME.anotar('formulario-' + selector.value);
+    });
+
+    /* Enlaces de la web que apuntan a #eventos o #reserva abren el modo correcto */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="#eventos"], a[href*="#evento"], a[href*="#reserva"]');
+      if (!a) return;
+      var m = modoDesdeHash(a.getAttribute('href'));
+      if (m) poner(m, false);
+    });
+    window.addEventListener('hashchange', function () { var m = modoDesdeHash(location.hash); if (m) poner(m, false); });
+
+    poner(modoDesdeHash(location.hash) || 'mesa', false);
+  })();
+
   /* ---------- Formularios por pasos ---------- */
   var reglas = {
     text: function (el) { return el.value.trim().length >= 2; },
