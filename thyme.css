@@ -2963,9 +2963,13 @@ h1, h2, .hero-title { text-wrap: balance; }
    vino se aclara lo justo para que el blanco encima cumpla
    contraste. Todos los pares comprobados: ninguno baja de
    4,5:1, que es el minimo legible.
-   Se activa solo si el sistema del visitante lo pide.
+   DESACTIVADO (oct 2026): el diseño 2026 (thyme-2026.css) es solo
+   claro y estas variables oscuras se mezclaban con él, dejando
+   texto oscuro sobre fondo oscuro en botones y contadores.
+   La condición (max-width:0px) hace que no se aplique nunca.
    ========================================================= */
-@media (prefers-color-scheme: dark){
+:root{color-scheme:light;}
+@media (prefers-color-scheme: dark) and (max-width: 0px){
   :root{
     color-scheme: dark;
 
