@@ -1287,3 +1287,29 @@
     });
   }
 })();
+
+/* ============================================================
+   Botones flotantes (WhatsApp y "volver arriba") en móvil
+   ------------------------------------------------------------
+   Mientras el cliente baja por la página se apartan para no tapar
+   botones como "Añadir al pedido". Vuelven en cuanto sube un poco,
+   o al llegar al final de la página.
+   ============================================================ */
+(function () {
+  'use strict';
+  var raiz = document.documentElement;
+  var ultimo = window.pageYOffset || 0;
+  var pendiente = false;
+  function revisar() {
+    pendiente = false;
+    var y = window.pageYOffset || 0;
+    var dy = y - ultimo;
+    var alFinal = y + window.innerHeight >= raiz.scrollHeight - 140;
+    if (y < 200 || alFinal || dy < -8) raiz.classList.remove('ui-bajando');
+    else if (dy > 8) raiz.classList.add('ui-bajando');
+    if (Math.abs(dy) > 8 || y < 200) ultimo = y;
+  }
+  window.addEventListener('scroll', function () {
+    if (!pendiente) { pendiente = true; window.requestAnimationFrame(revisar); }
+  }, { passive: true });
+})();

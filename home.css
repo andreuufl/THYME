@@ -597,3 +597,63 @@ fieldset{border:0;min-width:0;}
 @media (prefers-reduced-motion:reduce){
   .x-mode-copy,.x-mode-form{animation:none;}
 }
+
+/* =========================================================
+   MEJORAS DE USO · octubre 2026
+   ========================================================= */
+
+/* Aviso de cookies compacto: una línea en PC, bloque bajo en móvil */
+.cookie-banner{
+  display:flex;align-items:center;gap:12px 18px;
+  left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));
+  max-width:860px;margin-inline:auto;
+  padding:8px 8px 8px 24px;border-radius:999px;
+}
+.cookie-banner p{flex:1 1 auto;margin:0 !important;font-size:.88rem;line-height:1.4;color:rgba(29,25,19,.8);}
+.cookie-banner p a{white-space:nowrap;}
+.cookie-actions{flex:0 0 auto;display:flex;gap:8px;flex-wrap:nowrap !important;}
+.cookie-actions .btn,.cookie-actions .x-btn{min-height:44px;padding:0 20px !important;font-size:.88rem !important;flex:0 0 auto !important;}
+@media (max-width:600px){
+  .cookie-banner{flex-direction:column;align-items:stretch;gap:10px;padding:14px 14px 12px;border-radius:20px;}
+  .cookie-banner p{font-size:.84rem;}
+  .cookie-actions .btn,.cookie-actions .x-btn{flex:1 1 0 !important;}
+}
+
+/* Botones flotantes: se apartan mientras se baja por la página (móvil) */
+@media (max-width:900px){
+  .whatsapp-float,.back-to-top{transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .3s ease,bottom .35s ease,visibility .3s !important;}
+  html.ui-bajando .whatsapp-float,
+  html.ui-bajando .back-to-top{transform:translateY(calc(100% + 40px)) !important;opacity:0 !important;pointer-events:none !important;}
+}
+
+/* Los botones flotantes se colocan encima del aviso de cookies */
+.whatsapp-float{bottom:calc(18px + env(safe-area-inset-bottom) + var(--alto-cookies,0px));}
+.back-to-top{bottom:calc(86px + env(safe-area-inset-bottom) + var(--alto-cookies,0px));}
+@media (max-width:760px){
+  .back-to-top{bottom:calc(78px + env(safe-area-inset-bottom) + var(--alto-cookies,0px));}
+}
+
+/* Portada: titular más contenido para que se vea comida y botones sin bajar */
+.x-hero{padding-top:clamp(36px, 6vw, 84px);}
+.x-hero-copy .x-display{font-size:clamp(2.9rem, 4.9vw, 4.7rem);max-width:17ch;margin:10px 0 22px;}
+.x-hero-copy .x-lede{margin-bottom:28px;}
+@media (max-width:760px){
+  .x-hero{padding-top:28px;}
+  .x-hero-copy .x-display{font-size:clamp(2rem, 8.9vw, 2.6rem);max-width:15ch;line-height:1.02;margin:6px 0 16px;}
+  .x-hero-copy .x-lede{font-size:1rem;line-height:1.55;margin-bottom:22px;}
+  .x-hero-ctas{gap:10px;}
+}
+
+/* Más contraste en textos claros sobre fondo oscuro */
+.x-muted-light{color:rgba(244,238,227,.84);}
+
+@media (pointer:coarse){
+  .x-footer ul{gap:0 !important;}
+  .x-footer ul a,.x-footer-bottom a{display:inline-flex;align-items:center;min-height:44px;}
+}
+@media (pointer:coarse){
+  .x-lang{min-width:44px;height:44px;}
+  .x-snap-nav .x-round{width:44px;height:44px;}
+  .x-brand{min-height:44px;}
+}
+.lightbox-close{min-width:44px;min-height:44px;}

@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap">
 
 <link rel="stylesheet" href="thyme.css?v=65">
-<link rel="stylesheet" href="thyme-2026.css?v=3">
+<link rel="stylesheet" href="thyme-2026.css?v=4">
 
 <script type="application/ld+json">
 {
@@ -57,7 +57,7 @@
     <span><strong>Pedido mínimo 100€</strong> · <span class="t-long">Encargos con 2 días hábiles de antelación</span><span class="t-short">2 días hábiles</span></span>
     <div class="topbar-cp" data-cp-check>
       <label for="cp-top">¿Entregamos en tu zona?</label>
-      <input id="cp-top" type="text" inputmode="numeric" maxlength="5" placeholder="Código postal" autocomplete="postal-code">
+      <input id="cp-top" type="text" inputmode="numeric" maxlength="5" placeholder="Tu CP" autocomplete="postal-code">
       <span class="cp-result" data-cp-out aria-live="polite"></span>
     </div>
   </div>
@@ -300,9 +300,9 @@
   </aside>
 </div>
 
-<!-- Barra fija de pedido (móvil) y aviso -->
+<!-- Barra fija de pedido y aviso -->
 <button type="button" class="cart-bar" data-cart-bar data-abrir-cesta hidden>
-  <span data-cart-bar-text></span><strong>Ver pedido →</strong>
+  <span class="cart-bar-info"><span data-cart-bar-text></span><small data-cart-bar-falta></small></span><strong>Ver pedido →</strong><i class="cart-bar-prog" data-cart-bar-prog aria-hidden="true"></i>
 </button>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
 
@@ -339,7 +339,7 @@
 
 <!-- ============ COOKIES ============ -->
 <div class="cookie-banner" data-cookie-banner role="dialog" aria-live="polite" aria-label="Aviso de cookies">
-  <p>Esta web no usa cookies de analítica ni de publicidad. Solo guardamos en tu navegador la preferencia que elijas aquí, y cargamos las tipografías de Google Fonts (un servicio externo). Más información en nuestra <a href="/cookies">política de cookies</a>.</p>
+  <p>Sin cookies de publicidad ni de analítica: solo guardamos tu elección. <a href="/cookies">Más información</a></p>
   <div class="cookie-actions">
     <button type="button" class="btn btn-primary" data-cookie-action="accepted">Aceptar</button>
     <button type="button" class="btn btn-outline" data-cookie-action="rejected">Rechazar</button>
@@ -347,9 +347,9 @@
 </div>
 
 <script src="repertorio.js?v=3"></script>
-<script src="thyme-main.js?v=23"></script>
+<script src="thyme-main.js?v=24"></script>
 <script src="analitica.js?v=1"></script>
 <script src="productos.js?v=10"></script>
-<script src="tienda.js?v=16"></script>
+<script src="tienda.js?v=17"></script>
 </body>
 </html>

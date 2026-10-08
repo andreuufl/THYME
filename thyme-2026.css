@@ -190,3 +190,115 @@ input[type=checkbox]{accent-color:var(--x-ink);}
 /* Cabecera de grupo dentro de una página de box (p. ej. Cocktail Box 2) */
 .box-grupo{grid-column:1/-1;font-size:clamp(1.4rem,2.4vw,1.9rem);margin:18px 0 -6px;padding-top:18px;border-top:1px solid var(--line, rgba(29,25,19,.12));}
 .box-grupo:first-child{margin-top:0;padding-top:0;border-top:0;}
+
+/* =========================================================
+   MEJORAS DE USO · octubre 2026
+   ========================================================= */
+
+/* Aviso de cookies compacto: una línea en PC, bloque bajo en móvil */
+.cookie-banner{
+  display:flex;align-items:center;gap:12px 18px;
+  left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));
+  max-width:860px;margin-inline:auto;
+  padding:8px 8px 8px 24px;border-radius:999px;
+}
+.cookie-banner p{flex:1 1 auto;margin:0 !important;font-size:.88rem;line-height:1.4;color:rgba(29,25,19,.8);}
+.cookie-banner p a{white-space:nowrap;}
+.cookie-actions{flex:0 0 auto;display:flex;gap:8px;flex-wrap:nowrap !important;}
+.cookie-actions .btn,.cookie-actions .x-btn{min-height:44px;padding:0 20px !important;font-size:.88rem !important;flex:0 0 auto !important;}
+@media (max-width:600px){
+  .cookie-banner{flex-direction:column;align-items:stretch;gap:10px;padding:14px 14px 12px;border-radius:20px;}
+  .cookie-banner p{font-size:.84rem;}
+  .cookie-actions .btn,.cookie-actions .x-btn{flex:1 1 0 !important;}
+}
+
+/* Botones flotantes: se apartan mientras se baja por la página (móvil) */
+@media (max-width:900px){
+  .whatsapp-float,.back-to-top{transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .3s ease,bottom .35s ease,visibility .3s !important;}
+  html.ui-bajando .whatsapp-float,
+  html.ui-bajando .back-to-top{transform:translateY(calc(100% + 40px)) !important;opacity:0 !important;pointer-events:none !important;}
+}
+
+/* Comprobador de código postal de la barra superior: legible */
+.topbar .topbar-cp input#cp-top{
+  width:150px;height:32px;padding:0 12px !important;
+  border-radius:999px !important;font-size:16px !important;line-height:32px;
+  color:#F4EEE3 !important;
+  background:rgba(255,255,255,.1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D9BE8C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z'/%3E%3Ccircle cx='12' cy='9.5' r='2.5'/%3E%3C/svg%3E") no-repeat 11px 50% / 14px 14px !important;
+  padding-left:31px !important;
+  border:1px solid rgba(217,190,140,.6) !important;box-shadow:none !important;
+}
+.topbar .topbar-cp input#cp-top::placeholder{color:rgba(244,238,227,.82) !important;opacity:1;}
+.topbar .topbar-cp input#cp-top:focus{outline:2px solid #D9BE8C;outline-offset:1px;background-color:rgba(255,255,255,.16) !important;}
+.topbar-cp .cp-result{z-index:20;}
+@media (max-width:760px){
+  .topbar .topbar-cp input#cp-top{width:108px;height:30px;}
+  .topbar .topbar-cp .cp-result{left:auto !important;right:0 !important;transform:none !important;width:min(280px,calc(100vw - 24px)) !important;}
+}
+
+/* Barra fija del pedido: total y lo que falta para el mínimo */
+.cart-bar:not([hidden]){display:flex !important;}
+.cart-bar{
+  left:16px;right:88px;bottom:calc(14px + env(safe-area-inset-bottom) + var(--alto-cookies,0px));
+  min-height:58px;padding:9px 18px 11px 20px;align-items:center;gap:12px;
+  overflow:hidden;white-space:normal !important;text-decoration:none;text-align:left;
+  transition:right .35s ease,bottom .35s ease;
+}
+.cart-bar-info{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;}
+.cart-bar-info > span{font-weight:600;font-size:.92rem;color:#F4EEE3;white-space:nowrap;}
+.cart-bar-info small{font-size:.78rem;color:rgba(244,238,227,.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+.cart-bar.is-ok .cart-bar-info small{color:#A9DDB4;}
+.cart-bar > strong{white-space:nowrap;font-size:.9rem;flex:0 0 auto;}
+.cart-bar-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(244,238,227,.14);}
+.cart-bar-prog::after{content:"";position:absolute;top:0;bottom:0;left:0;width:var(--p,0%);background:#D9BE8C;transition:width .4s ease;}
+.cart-bar.is-ok .cart-bar-prog::after{background:#6CC283;}
+@media (max-width:900px){
+  html.ui-bajando .cart-bar{right:16px;}
+}
+@media (min-width:901px){
+  .cart-bar{left:auto;right:104px;width:380px;transform:none;bottom:calc(26px + var(--alto-cookies,0px));}
+}
+body:has(.cart-bar:not([hidden])) .toast{bottom:calc(86px + env(safe-area-inset-bottom) + var(--alto-cookies,0px)) !important;}
+
+/* Fotos de las cajas: encuadre en la comida, no en la tapa */
+img.foto-caja{object-position:50% 90% !important;}
+
+/* Nombres de producto más visibles en la carta */
+.producto-body h3{font-size:1.18rem !important;font-weight:500;line-height:1.2 !important;color:#1D1913;}
+@media (max-width:760px){
+  .producto-body h3{font-size:1.02rem !important;line-height:1.2 !important;margin-bottom:6px !important;}
+}
+
+/* Fichas de las páginas de box más compactas */
+.box-det{margin:2px 0 10px;padding-top:10px;}
+.box-det summary{min-height:36px;align-items:center;}
+.box-aler{margin-bottom:10px;}
+.box-aler > span{margin-bottom:6px;}
+.box-aler .ficha-alergenos{gap:5px;}
+.box-aler .ficha-alergenos li{font-size:.72rem;padding:3px 9px;}
+.box-pie{padding-top:12px;}
+.box-pie .producto-precio{margin-bottom:10px;}
+@media (max-width:760px){
+  .box-body{padding:18px 18px 18px;}
+  .box-body h2{font-size:1.45rem;margin-bottom:6px;}
+  .box-texto{margin-bottom:8px;}
+}
+
+/* Zonas táctiles cómodas (mínimo 44 px) en móvil y tablet */
+@media (pointer:coarse){
+  .x-footer ul{gap:0 !important;}
+  .x-footer ul a,.x-footer-bottom a{display:inline-flex;align-items:center;min-height:44px;}
+}
+
+/* La barra del pedido no se superpone a la cesta ni al menú abiertos */
+html.no-scroll .cart-bar{display:none !important;}
+@media (pointer:coarse){
+  .cat-chip{min-height:44px;}
+  .catalogo-toolbar .switch,label.switch{min-height:44px;display:inline-flex;align-items:center;}
+  .orden select{min-height:44px;}
+  .box-det summary{min-height:44px;}
+  .box-ficha{display:inline-flex;align-items:center;min-height:44px;}
+  .x-header .x-lang,.x-lang{min-width:44px;height:44px;}
+  .x-brand{min-height:44px;}
+}
+body:has(.nav-open) .cart-bar,body:has(.lightbox.is-open) .cart-bar{display:none !important;}

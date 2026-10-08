@@ -33,7 +33,7 @@
   };
   function media(p, cls) {
     if (p.foto) {
-      return '<picture><source srcset="assets/img/' + p.foto + '.webp" type="image/webp"><img src="assets/img/' + p.foto + '.jpg" alt="' + esc(p.nombre) + '" loading="lazy" width="800" height="800"></picture>';
+      return '<picture><source srcset="assets/img/' + p.foto + '.webp" type="image/webp"><img src="assets/img/' + p.foto + '.jpg" alt="' + esc(p.nombre) + '"' + (/^(coffee|cocktail|croquetas)$/.test(p.cat) ? ' class="foto-caja"' : '') + ' loading="lazy" width="800" height="800"></picture>';
     }
     return '<div class="producto-placeholder ' + (cls || '') + '" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">' + (ICONOS[p.cat] || '') + '</svg><span>THYME</span><small>' + esc(p.nombre) + '</small></div>';
   }
@@ -236,6 +236,13 @@
     if (bar) {
       bar.hidden = !t.unidades;
       $('[data-cart-bar-text]').textContent = t.unidades + (t.unidades === 1 ? ' producto' : ' productos') + ' · ' + (t.total ? euros(t.total) : 'a consultar');
+      var minB = TIENDA.pedidoMinimo, falta = $('[data-cart-bar-falta]'), progB = $('[data-cart-bar-prog]');
+      if (falta) {
+        falta.textContent = t.total >= minB ? '✓ Pedido mínimo alcanzado'
+          : (t.total ? 'Mínimo: faltan ' + euros(minB - t.total) : 'Pedido mínimo ' + euros(minB));
+        bar.classList.toggle('is-ok', t.total >= minB);
+      }
+      if (progB) progB.style.setProperty('--p', Math.min(100, Math.round(t.total / minB * 100)) + '%');
     }
     var items = $('[data-cesta-items]');
     var ids = Object.keys(carrito);
