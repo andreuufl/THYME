@@ -36,6 +36,9 @@
     croquetasA:    ['croquetas-caja-card',    'Caja de croquetas artesanales de THYME'],
     croquetasB:    ['croquetas-caja-b-card',  'Caja de croquetas artesanales de THYME'],
     mcocktail:     ['menu-cocktail-card',     'Cocktail Box de THYME lista para servir'],
+    bocJamon:      ['bocadillo-jamon-caja-card',    'Caja de mini bocadillos de jamon iberico de THYME'],
+    bocManchego:   ['bocadillo-manchego-caja-card', 'Caja de mini bocadillos de queso manchego de THYME'],
+    bocVegetal:    ['bocadillo-vegetal-caja-card',  'Caja de mini bocadillos vegetales de THYME'],
 
     tablaQuesos:   ['tabla-quesos-card',            'Tabla de quesos variados de THYME'],
     tablaMixtaBox: ['tabla-mixta-box-card',         'Tabla mixta de quesos y embutidos de THYME'],
@@ -51,7 +54,8 @@
   var REPERTORIOS = {
     dulce:    ['donuts','gofres','croissants','magdalenas','napolitanas',
                'mdonuts','mgofres','mcroissants','mcoffee'],
-    cocktail: ['burgers','mburgers','croquetasA','croquetasB','mcocktail'],
+    cocktail: ['burgers','mburgers','croquetasA','croquetasB',
+               'bocJamon','bocManchego','bocVegetal'],
     tablas:   ['tablaQuesos','tablaMixtaBox','tablaIbericos','tablaMixta','instaMixta'],
     todo:     ['croissants','gofres','donuts','magdalenas','burgers','croquetasA',
                'tablaMixtaBox','tablaQuesos','tablaIbericos']
@@ -61,6 +65,8 @@
   var MISMAS = [
     ['instaMixta', 'tablaMixta'],
     ['croquetasA', 'croquetasB'],
+    ['burgers', 'mburgers', 'mcocktail'],   /* las tres salen con la misma caja de burgers */
+    ['bocJamon', 'bocManchego'],            /* a la vista son casi iguales */
     ['donuts', 'mdonuts'],
     ['gofres', 'mgofres'],
     ['croissants', 'mcroissants']
