@@ -66,6 +66,9 @@ h1 em,h2 em{font-style:italic;font-weight:300;color:var(--x-gold);}
 .btn-primary:hover{background:var(--x-olive);transform:none;box-shadow:0 16px 30px -14px rgba(29,25,19,.6);}
 .btn-outline{background:transparent;border:1px solid rgba(29,25,19,.22);color:var(--x-ink);}
 .btn-outline:hover{border-color:var(--x-ink);background:rgba(29,25,19,.04);transform:none;}
+/* Botones de los menús: thyme.css les pone fondo var(--blanco), que en modo oscuro es marrón → texto invisible */
+.menu-block-cta .btn-outline{background:transparent;}
+.menu-block-cta .btn-outline:hover{background:rgba(29,25,19,.04);}
 .btn-glass{background:var(--paper);border:1px solid var(--line);}
 .btn-whatsapp{background:var(--x-wa);color:#fff;box-shadow:0 10px 24px -12px rgba(31,168,85,.6);}
 .btn-whatsapp:hover{background:#1a9149;transform:none;}
@@ -302,3 +305,16 @@ html.no-scroll .cart-bar{display:none !important;}
   .x-brand{min-height:44px;}
 }
 body:has(.nav-open) .cart-bar,body:has(.lightbox.is-open) .cart-bar{display:none !important;}
+
+/* Señal para reservar (cesta) */
+.cesta-senal{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;font-size:var(--t-sm,.9rem);color:var(--x-ink);opacity:.8;}
+.cesta-senal strong{font-weight:600;}
+.cesta-pago{text-align:left;margin:6px 0 4px;padding:16px 18px;border:1px solid rgba(29,25,19,.14);border-radius:16px;background:rgba(29,25,19,.03);display:grid;gap:8px;}
+.cesta-pago strong{font-size:1.05rem;}
+.cesta-pago p{margin:0;font-size:.92rem;}
+.cesta-pago ul{list-style:none;margin:2px 0;padding:0;display:grid;gap:8px;}
+.cesta-pago li{display:grid;gap:2px;padding:10px 12px;border-radius:12px;background:#fff;border:1px solid rgba(29,25,19,.1);color:#1D1913;}
+.cesta-pago li span{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;opacity:.65;}
+.cesta-pago li b{font-size:1rem;font-weight:600;word-break:break-all;user-select:all;}
+.cesta-pago li small{font-size:.8rem;opacity:.7;}
+.cesta-pago-nota{opacity:.7;font-size:.82rem !important;}

@@ -264,6 +264,11 @@
     var min = TIENDA.pedidoMinimo;
     var pct = Math.min(100, Math.round(t.total / min * 100));
     $('[data-cesta-total]').textContent = t.total ? euros(t.total) : '0 €';
+    var senalBox = $('[data-cesta-senal]');
+    if (senalBox) {
+      senalBox.hidden = !t.total;
+      $('[data-cesta-senal-importe]').textContent = euros(importeSenal(t.total));
+    }
     $('[data-cesta-consultar]').hidden = !t.consultar;
     var prog = $('[data-cesta-progreso]');
     prog.style.setProperty('--p', pct + '%');
@@ -300,13 +305,46 @@
     return d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
   }
 
+  /* Señal del pedido (redondeada a céntimos) */
+  function confSenal() { return (TIENDA && TIENDA.senal) || { porcentaje: 50 }; }
+  function importeSenal(total) { return Math.round(total * confSenal().porcentaje) / 100; }
+  function pintarPago(total, nombre) {
+    var box = $('[data-cesta-pago]');
+    if (!box) return;
+    var s = confSenal(), imp = euros(importeSenal(total));
+    var html = '<strong>Señal para reservar: ' + esc(imp) + '</strong>' +
+      '<p>Págala cuando te confirmemos disponibilidad por WhatsApp. El resto, el día de la entrega.</p>';
+    var formas = [];
+    if (s.bizum) formas.push('<li><span>Bizum</span><b>' + esc(s.bizum) + '</b></li>');
+    if (s.iban) formas.push('<li><span>Transferencia</span><b>' + esc(s.iban) + '</b>' + (s.titular ? '<small>' + esc(s.titular) + '</small>' : '') + '</li>');
+    if (formas.length) {
+      html += '<ul>' + formas.join('') + '</ul><p class="cesta-pago-concepto">Concepto: <b>Señal ' + esc(nombre) + '</b></p>';
+    } else {
+      html += '<p>Te enviamos los datos para la transferencia por WhatsApp.</p>';
+    }
+    html += '<p class="cesta-pago-nota">Si cancelas hasta 2 días hábiles antes, te devolvemos la señal.</p>';
+    box.innerHTML = html;
+    box.hidden = !total;
+  }
+
+  /* Siempre confirmamos entrega. Varias frases para que no parezca un texto fijo;
+     la frase depende del CP, así el mismo código muestra siempre la misma. */
+  var FRASES_ZONA = [
+    '¡Sí! Entregamos en tu zona.',
+    'Perfecto, llegamos a tu código postal.',
+    'Buenas noticias: repartimos en tu zona.',
+    '¡Genial! Hacemos entregas en tu código postal.',
+    'Sí, tu zona está dentro de nuestro reparto.',
+    'Llegamos sin problema: entregamos en tu zona.',
+    '¡Claro! Te lo llevamos a tu código postal.',
+    'Confirmado: hacemos entregas en tu zona.'
+  ];
   function zona(cp) {
     cp = String(cp || '').trim();
     if (!/^\d{5}$/.test(cp)) return null;
-    var n = parseInt(cp, 10);
-    if (n >= TIENDA.cpBarcelona[0] && n <= TIENDA.cpBarcelona[1]) return { ok: true, txt: 'Entregamos en tu zona (Barcelona ciudad).' };
-    if (cp.slice(0, 2) === '08') return { ok: 'consultar', txt: 'Provincia de Barcelona: entregamos en muchas zonas; te confirmamos coste y disponibilidad.' };
-    return { ok: false, txt: 'De momento no llegamos a este código postal. Escríbenos y buscamos una solución.' };
+    var h = 0;
+    for (var i = 0; i < cp.length; i++) h = (h * 31 + cp.charCodeAt(i)) % 9973;
+    return { ok: true, txt: FRASES_ZONA[h % FRASES_ZONA.length] };
   }
 
   function mostrarZona(input, out) {
@@ -343,6 +381,7 @@
     });
     var txt = '¡Hola THYME! Quiero hacer este pedido:\n\n' + lineas.join('\n') +
       '\n\nSubtotal: ' + euros(t.total) + (t.consultar ? ' (+ productos a consultar)' : '') +
+      (t.total ? '\n💳 Señal para reservar (' + confSenal().porcentaje + '%): ' + euros(importeSenal(t.total)) : '') +
       '\n\n' + (modo === 'domicilio' ? '🚚 Entrega a domicilio' : '🏠 Recogida en vuestro espacio') +
       '\n📅 ' + bonita(fecha) + ', ' + franja +
       (modo === 'domicilio' ? '\n📍 ' + dir + ', ' + cp : '') +
@@ -371,6 +410,7 @@
 
     /* Confirmacion primero, WhatsApp despues: si abrimos antes, el cliente
        cambia de pestania y no llega a ver que el pedido se ha registrado. */
+    pintarPago(t.total, nombre);
     $('[data-cesta-ok]').hidden = false;
     form.hidden = true;
 

@@ -648,5 +648,15 @@ var TIENDA = {
   pedidoMinimo: 100,          // €
   diasAntelacion: 2,          // días hábiles
   franjas: ['09:00 – 11:00', '11:00 – 13:00', '13:00 – 15:00', '18:00 – 20:00'],
-  cpBarcelona: [8001, 8042]   // Códigos postales de Barcelona ciudad (08001–08042)
+  cpBarcelona: [8001, 8042],  // Códigos postales de Barcelona ciudad (08001–08042)
+
+  /* Señal para reservar la fecha (se paga cuando confirmamos disponibilidad).
+     Si dejas bizum o iban vacíos, esa opción no aparece y se indica que
+     enviamos los datos de pago por WhatsApp. */
+  senal: {
+    porcentaje: 50,
+    bizum: '',                 // ej. '607 86 43 93'
+    iban: 'ES82 2100 0439 3302 0059 5784',
+    titular: 'Thyme Events And Gastronomic Experiences'
+  }
 };

@@ -956,7 +956,8 @@
         '- Personas: ' + personas + '\n' +
         '- Tabla preferida: ' + tablaTexto + '\n' +
         '- Teléfono: ' + telefono +
-        (mensaje.trim() ? ('\n- Comentario: ' + mensaje.trim()) : '');
+        (mensaje.trim() ? ('\n- Comentario: ' + mensaje.trim()) : '') +
+        '\n\nEntiendo que, si acepto el presupuesto, la fecha se reserva con una señal del 50%.';
 
       var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(texto);
 
