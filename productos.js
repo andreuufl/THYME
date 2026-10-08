@@ -207,7 +207,7 @@ var PRODUCTOS = [
     nombre: "Burger de pollo y queso",
     formato: "15 unidades",
     precio: 22,
-    foto: null,
+    foto: "burger-pollo",
     resumen: "Mini burger de pollo con queso fundido.",
     historia: ["Mini burger de pollo con queso fundido."],
     ingredientes: ["Pan de burger", "Pollo", "Queso"],
