@@ -64,7 +64,7 @@
             '<div class="producto-precio">' + (p.precio != null ? '<strong>' + euros(p.precio) + '</strong>' : '<strong class="producto-consultar">Consultar precio</strong>') + '</div>' +
             '<div class="box-botones">' +
               '<button type="button" class="btn btn-primary" data-box-anadir="' + p.id + '">' + (p.precio != null ? 'Añadir al pedido' : 'Añadir para consultar') + '</button>' +
-              '<a class="box-ficha" href="pedidos.html#' + p.id + '">Ficha completa</a>' +
+              '<a class="box-ficha" href="/pedidos#' + p.id + '">Ficha completa</a>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -98,7 +98,7 @@
     b.textContent = '✓ Añadido';
     setTimeout(function () { b.textContent = 'Añadir otro'; }, 1400);
     if (toast) {
-      toast.innerHTML = '<span>' + esc(byId[id].nombre) + ' añadido</span><a href="pedidos.html#pedido">Ver pedido</a>';
+      toast.innerHTML = '<span>' + esc(byId[id].nombre) + ' añadido</span><a href="/pedidos#pedido">Ver pedido</a>';
       toast.classList.add('is-visible');
       clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('is-visible'); }, 3200);
     }

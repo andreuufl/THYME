@@ -994,7 +994,7 @@
          gracias. Si el navegador lo bloqueo, usamos esta misma pestania
          para ir a WhatsApp, que es lo que el cliente ha pedido. */
       setTimeout(function () {
-        window.location.href = abierto ? ('gracias.html?' + params.toString()) : url;
+        window.location.href = abierto ? ('/gracias?' + params.toString()) : url;
       }, abierto ? 1300 : 700);
     });
   }
@@ -1104,7 +1104,7 @@
 
       var params = new URLSearchParams({ nombre: nombre, fecha: fechaLegible, tabla: tipo + ' — ' + invitados + ' invitados' });
       setTimeout(function () {
-        window.location.href = abierto ? ('gracias.html?' + params.toString()) : url;
+        window.location.href = abierto ? ('/gracias?' + params.toString()) : url;
       }, abierto ? 1300 : 700);
     });
   })();

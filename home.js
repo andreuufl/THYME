@@ -365,7 +365,7 @@
           cta.textContent = document.documentElement.lang === 'en' ? 'Book a private table' : 'Reservar mesa privada';
         }
         /* Enlaces de la propia web: misma pestaña */
-        if (!href || href.charAt(0) === '#' || href.indexOf('.html') > -1) {
+        if (!href || href.charAt(0) === '#' || href.charAt(0) === '/' || href.indexOf('.html') > -1) {
           cta.removeAttribute('target');
           cta.removeAttribute('rel');
         }
