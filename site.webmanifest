@@ -1,8 +1,8 @@
 {
   "name": "THYME Express Catering",
   "short_name": "THYME",
-  "description": "Tablas gourmet y catering para bodas y eventos en Barcelona.",
-  "start_url": "./index.html",
+  "description": "Catering para eventos, empresas y celebraciones en Barcelona.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#F3ECDA",
   "theme_color": "#2A1B10",

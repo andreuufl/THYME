@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://andreuufl.github.io/THYME/sitemap.xml
+Sitemap: https://www.thymecatering.es/sitemap.xml

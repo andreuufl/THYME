@@ -27,7 +27,7 @@
   /* ---------- CONFIGURACIÓN ---------- */
   var PROVEEDOR = 'cloudflare';   /* 'cloudflare' | 'plausible' | 'goatcounter' */
   var SITIO     = '';             /* <-- tu identificador. Vacío = apagada. */
-  var DOMINIO   = 'andreuufl.github.io';   /* solo lo usa plausible */
+  var DOMINIO   = 'www.thymecatering.es';   /* solo lo usa plausible */
 
   if (!SITIO) return;             /* apagada: no carga nada */
 
