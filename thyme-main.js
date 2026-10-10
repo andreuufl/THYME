@@ -15,8 +15,12 @@
      ahora — esto es un envío adicional, no sustituye nada. */
   var RESERVA_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbwhOlWFo8NrIsEhQmZoZM7JQUOv0ShLXY0KnqZG3FhgiLvJjrctNpdhrTFlP011U5d12A/exec';
 
+  var CARGA_PAGINA = Date.now();
+
   function enviarReservaABackend(payload) {
     if (!RESERVA_ENDPOINT_URL) return;
+    payload = payload || {};
+    payload._t = Date.now() - CARGA_PAGINA; /* tiempo en la página: el servidor descarta envíos automáticos de bots */
     var body = JSON.stringify(payload);
     try {
       /* sendBeacon está pensado exactamente para esto: un envío que sobrevive
